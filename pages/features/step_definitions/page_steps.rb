@@ -8,6 +8,10 @@ Given /^the page titled "?([^\"]*)"? has a menu match "?([^\"]*)"?$/ do |title, 
   Page.by_title(title).first.update_attribute(:menu_match, menu_match)
 end
 
+Given /^the page titled "?([^\"]*)"? is set to skip to first child$/ do |title|
+  Page.by_title(title).first.update_attribute(:skip_to_first_child, true)
+end
+
 Given /^I (only )?have pages titled "?([^\"]*)"?$/ do |only, titles|
   Page.delete_all if only
   titles.split(', ').each do |title|
@@ -49,4 +53,8 @@ end
 
 Then /^I should have (\d+) page_parts$/ do |count|
   PagePart.count.should == count.to_i
+end
+
+Given /^I have frontend locales "?([^\"]*)"?/ do |locales|
+  RefinerySetting.set(:i18n_translation_frontend_locales, {:value => locales.split(', '), :scoping => 'refinery'})
 end

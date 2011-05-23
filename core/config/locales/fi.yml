@@ -16,8 +16,8 @@ fi:
     continue: Jatka...
   admin:
     menu:
-      reorder_menu: Uudelleenjärjestä valikko
-      reorder_menu_done: Olen valmis
+      reorder_menu: Muuta valikon järjestystä
+      reorder_menu_done: Tallenna
     dialogs:
       show:
         save: Tallenna
@@ -58,7 +58,7 @@ fi:
         results_for: "Hakutulokset haulle '%{query}'"
         no_results: 'Valitettavasti mitään ei löytynyt'
       delete:
-        message: "Oletko varma, että haluat poistaa sivun '%{title}'?"
+        message: "Oletko varma, että haluat poistaa sisältöesineen '%{title}'?"
       error_messages:
         problems_in_following_fields: Seuraavissa kentissä oli virheitä
       help: apua
