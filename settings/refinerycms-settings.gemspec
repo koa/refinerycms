@@ -2,10 +2,10 @@
 
 Gem::Specification.new do |s|
   s.name              = %q{refinerycms-settings}
-  s.version           = %q{1.0.0}
+  s.version           = %q{1.1.0}
   s.summary           = %q{Settings engine for Refinery CMS}
   s.description       = %q{The default settings engine that is required by Refinery CMS core. Adds programmer creatable, user editable settings for each engine.}
-  s.date              = %q{2011-05-22}
+  s.date              = %q{2011-05-30}
   s.email             = %q{info@refinerycms.com}
   s.homepage          = %q{http://refinerycms.com}
   s.rubyforge_project = %q{refinerycms}
@@ -17,23 +17,28 @@ Gem::Specification.new do |s|
   s.files             = [
     'app',
     'app/controllers',
-    'app/controllers/admin',
-    'app/controllers/admin/refinery_settings_controller.rb',
+    'app/controllers/refinery',
+    'app/controllers/refinery/admin',
+    'app/controllers/refinery/admin/settings_controller.rb',
     'app/helpers',
-    'app/helpers/refinery_settings_helper.rb',
+    'app/helpers/refinery',
+    'app/helpers/refinery/admin',
+    'app/helpers/refinery/admin/settings_helper.rb',
     'app/models',
-    'app/models/refinery_setting.rb',
+    'app/models/refinery',
+    'app/models/refinery/setting.rb',
     'app/views',
-    'app/views/admin',
-    'app/views/admin/refinery_settings',
-    'app/views/admin/refinery_settings/_actions.html.erb',
-    'app/views/admin/refinery_settings/_form.html.erb',
-    'app/views/admin/refinery_settings/_records.html.erb',
-    'app/views/admin/refinery_settings/_refinery_setting.html.erb',
-    'app/views/admin/refinery_settings/_refinery_settings.html.erb',
-    'app/views/admin/refinery_settings/edit.html.erb',
-    'app/views/admin/refinery_settings/index.html.erb',
-    'app/views/admin/refinery_settings/new.html.erb',
+    'app/views/refinery',
+    'app/views/refinery/admin',
+    'app/views/refinery/admin/settings',
+    'app/views/refinery/admin/settings/_actions.html.erb',
+    'app/views/refinery/admin/settings/_form.html.erb',
+    'app/views/refinery/admin/settings/_records.html.erb',
+    'app/views/refinery/admin/settings/_setting.html.erb',
+    'app/views/refinery/admin/settings/_settings.html.erb',
+    'app/views/refinery/admin/settings/edit.html.erb',
+    'app/views/refinery/admin/settings/index.html.erb',
+    'app/views/refinery/admin/settings/new.html.erb',
     'config',
     'config/locales',
     'config/locales/cs.yml',
@@ -81,8 +86,9 @@ Gem::Specification.new do |s|
     'refinerycms-settings.gemspec',
     'spec',
     'spec/models',
-    'spec/models/refinery_setting_spec.rb'
+    'spec/models/refinery',
+    'spec/models/refinery/setting_spec.rb'
   ]
 
-  s.add_dependency 'refinerycms-base', '~> 1.0.0'
+  s.add_dependency 'refinerycms-base', '= 1.1.0'
 end

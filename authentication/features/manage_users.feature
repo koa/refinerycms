@@ -11,7 +11,7 @@ Feature: Manage Users
     When I go to the home page
     Then I should see "There are no users yet, so we'll set you up first."
 
-  @users-add @add
+  @users-add @add @wip
   Scenario: When there are no users, you can create a user
     When I go to the home page
     And I follow "Continue..."
@@ -38,6 +38,7 @@ Feature: Manage Users
     And I am a logged in refinery user
     When I go to the list of users
     And I follow "Add new user"
+    
     And I fill in "Username" with "cucumber"
     And I fill in "Email" with "green@cucumber.com"
     And I fill in "Password" with "greenandjuicy"
@@ -60,7 +61,7 @@ Feature: Manage Users
     And I should see "cucumber was successfully updated."
     And I should see "cucumber (green@cucumber.com)"
 
-  @users-dashboard @add
+  @users-dashboard @add @wip
   Scenario: Add User
     Given I have a user named "steven"
     And I am a logged in refinery user
@@ -75,7 +76,7 @@ Feature: Manage Users
     When I go to the Dashboard
     Then I should see "Marian user was added"
 
-  @users-dashboard @edit
+  @users-dashboard @edit @wip
   Scenario: Edit User
     Given I have a user named "steven"
     And I am a logged in refinery user

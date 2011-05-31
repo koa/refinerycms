@@ -24,7 +24,6 @@ pt-BR:
       created: "%{what} foi criado com sucesso"
       updated: "%{what} foi atualizado com sucesso"
       destroyed: "%{what} foi apagado com sucesso"
-  shared:
     site_bar:
       log_out: Sair
       switch_to_your_website: Mudar para o seu website
@@ -70,3 +69,6 @@ pt-BR:
       enable_javascript: Para ter todas as funcionalidades dessa página é necessário ter JavaScript habilitado.
       here_are: Aqui estão as
       instructions_enable_javascript: instruções para habilitar JavaScript no seu navegador.
+  pagination:
+    next: "&raquo;"
+    previous: "&laquo;"

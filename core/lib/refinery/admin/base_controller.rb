@@ -14,7 +14,7 @@ module Refinery
         def self.included(c)
           c.layout :layout?
 
-          c.before_filter :authenticate_user!, :restrict_plugins, :restrict_controller
+          c.before_filter :authenticate_refinery_user!, :restrict_plugins, :restrict_controller
           c.after_filter :store_location?, :except => [:new, :create, :edit, :update, :destroy, :update_positions] # for redirect_back_or_default
 
           c.helper_method :searching?, :group_by_date
@@ -52,23 +52,23 @@ module Refinery
         end
 
         def restrict_plugins
-          current_length = (plugins = current_user.authorized_plugins).length
+          current_length = (plugins = current_refinery_user.authorized_plugins).length
 
           # Superusers get granted access if they don't already have access.
-          if current_user.has_role?(:superuser)
+          if current_refinery_user.has_role?(:superuser)
             if (plugins = plugins | ::Refinery::Plugins.registered.names).length > current_length
-              current_user.plugins = plugins
+              current_refinery_user.plugins = plugins
             end
           end
 
-          Refinery::Plugins.set_active(plugins)
+          ::Refinery::Plugins.set_active(plugins)
         end
 
         def restrict_controller
-          if Refinery::Plugins.active.reject { |plugin| params[:controller] !~ Regexp.new(plugin.menu_match)}.empty?
-            warn "'#{current_user.username}' tried to access '#{params[:controller]}' but was rejected."
-            error_404
-          end
+          # if Refinery::Plugins.active.reject { |plugin| params[:controller] !~ Regexp.new(plugin.menu_match)}.empty?
+          #   warn "'#{current_refinery_user.username}' tried to access '#{params[:controller]}' but was rejected."
+          #   error_404
+          # end
         end
 
         # Override method from application_controller. Not needed in this controller.
@@ -76,11 +76,11 @@ module Refinery
 
       private
         def layout?
-          "admin#{"_dialog" if from_dialog?}"
+          "refinery/admin#{"_dialog" if from_dialog?}"
         end
 
         # Check whether it makes sense to return the user to the last page they
-        # were at instead of the default e.g. admin_pages_url
+        # were at instead of the default e.g. refinery_admin_pages_path
         # right now we just want to snap back to index actions and definitely not to dialogues.
         def store_location?
           store_location unless action_name !~ /index/ or request.xhr? or from_dialog?

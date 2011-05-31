@@ -1,5 +1,5 @@
-::Refinery::Plugins.registered.map{|p|
-  p.pathname.join('features', 'support', 'paths.rb')
+([Rails.root] | ::Refinery::Plugins.registered.pathnames).map{|path|
+  path.join('features', 'support', 'paths.rb')
 }.reject{|p| !p.exist?}.each do |paths|
   require paths
 end
@@ -21,6 +21,7 @@ module NavigationHelpers
   #     end
   #   end
   # end
+
   NavigationHelpers::Refinery.constants.each do |name|
     begin
       if (mod = "NavigationHelpers::Refinery::#{name}".constantize)
@@ -41,7 +42,7 @@ module NavigationHelpers
     case page_name
 
     when /the admin root/
-      admin_root_path
+      refinery_admin_root_path
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

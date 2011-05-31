@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<%= render :partial => "/shared/html_tag" %>
-  <%= render :partial => "/admin/head", :locals => {:login => true} %>
+<%= render :partial => "/refinery/html_tag" %>
+  <%= render :partial => "refinery/admin/head", :locals => {:login => true} %>
   <body class='login <%= I18n.locale %>'>
     <div id='tooltip_container'></div>
     <header>
@@ -10,12 +10,12 @@
       <div id="page">
         <div id="content" class="clearfix">
           <div id="flash_container">
-            <%= render :partial => "/shared/message" %>
+            <%= render :partial => "/refinery/message" %>
           </div>
           <%= yield %>
         </div>
       </div>
     </div>
-    <%= render :partial => "/admin/javascripts", :locals => {:login => true} %>
+    <%= render :partial => "refinery/admin/javascripts", :locals => {:login => true} %>
   </body>
 </html>

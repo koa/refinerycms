@@ -24,7 +24,6 @@ lolcat:
       created: '%{what} WUZ SUCCESFULLY ADDD.'
       updated: '%{what} WUZ SUCCESFULLY UPDATD.'
       destroyed: '%{what} WUZ SUCCESFULLY REMOVD.'
-  shared:
     site_bar:
       log_out: LOG OUT
       switch_to_your_website: SWITCH 2 UR WEBSIET
@@ -66,3 +65,6 @@ lolcat:
       not_live: DIS PAEG IZ NOT LIV 4 PUBLIC VIEWIN.
     footer:
       copyright: COPYRIGHT © %{year} %{site_name}
+  pagination:
+    next: "&raquo;"
+    previous: "&laquo;"

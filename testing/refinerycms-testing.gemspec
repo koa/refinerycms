@@ -2,10 +2,10 @@
 
 Gem::Specification.new do |s|
   s.name              = %q{refinerycms-testing}
-  s.version           = %q{1.0.0}
+  s.version           = %q{1.1.0}
   s.summary           = %q{Testing plugin for Refinery CMS}
   s.description       = %q{This plugin adds the ability to run cucumber and rspec against the RefineryCMS gem while inside a RefineryCMS project}
-  s.date              = %q{2011-05-22}
+  s.date              = %q{2011-05-30}
   s.email             = %q{info@refinerycms.com}
   s.homepage          = %q{http://refinerycms.com}
   s.rubyforge_project = %q{refinerycms}
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.require_paths     = %w(lib)
   s.executables       = %w()
 
-  s.add_dependency 'refinerycms-core', '~> 1.0.0'
+  s.add_dependency 'refinerycms-core',  '= 1.1.0'
   # RSpec
   s.add_dependency 'rspec-rails',       '~> 2.6'
 
@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'cucumber'
   s.add_dependency 'launchy'
   s.add_dependency 'gherkin'
-  s.add_dependency 'rack-test',         '~> 0.5.6'
+  s.add_dependency 'rack-test',         '>= 0.5.6'
   s.add_dependency 'json_pure'
 
   # Factory Girl
@@ -35,6 +35,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'autotest'
   s.add_dependency 'autotest-rails'
   s.add_dependency 'autotest-notification'
+
+  # RCov
+  s.add_dependency 'rcov'
 
   s.files             = [
     '.rspec',
@@ -59,9 +62,13 @@ Gem::Specification.new do |s|
     'lib/refinerycms-testing.rb',
     'lib/tasks',
     'lib/tasks/cucumber.rake',
+    'lib/tasks/rcov.rake',
     'refinerycms-testing.gemspec',
     'spec',
     'spec/rcov.opts',
-    'spec/spec_helper.rb'
+    'spec/spec_helper.rb',
+    'spec/support',
+    'spec/support/refinery',
+    'spec/support/refinery/controller_macros.rb'
   ]
 end

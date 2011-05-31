@@ -6,8 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
-module RefineryApp
+module ::RefineryApp
   class Application < Rails::Application
+    Rails.backtrace_cleaner.remove_silencers!
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -28,7 +29,7 @@ module RefineryApp
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    config.i18n.default_locale = :en
 
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
@@ -51,5 +52,8 @@ module RefineryApp
     # which shouldn't be used to store highly confidential information
     # (create the session table with "rails generate session_migration")
     # RefineryApp::Application.config.session_store :active_record_store
+
+    # Enable the asset pipeline
+    config.assets.enabled = true
   end
 end

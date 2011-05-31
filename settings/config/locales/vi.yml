@@ -40,9 +40,9 @@ vi:
           
   activerecord:
     models:
-      refinery_setting: Thiết lập
+      setting: Thiết lập
     attributes:
-      refinery_setting:
+      setting:
         name: Tên
         value: Giá trị
         restricted: Giới hạn

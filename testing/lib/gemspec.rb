@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths     = %w(lib)
   s.executables       = %w(#{Pathname.glob(gempath.join('bin/*')).map{|d| d.relative_path_from(gempath)}.sort.join(" ")})
 
-  s.add_dependency 'refinerycms-core', '~> #{::Refinery::Version}'
+  s.add_dependency 'refinerycms-core',  '= #{::Refinery::Version}'
   # RSpec
   s.add_dependency 'rspec-rails',       '~> 2.6'
 
@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'cucumber'
   s.add_dependency 'launchy'
   s.add_dependency 'gherkin'
-  s.add_dependency 'rack-test',         '~> 0.5.6'
+  s.add_dependency 'rack-test',         '>= 0.5.6'
   s.add_dependency 'json_pure'
 
   # Factory Girl
@@ -40,6 +40,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'autotest'
   s.add_dependency 'autotest-rails'
   s.add_dependency 'autotest-notification'
+
+  # RCov
+  s.add_dependency 'rcov'
 
   s.files             = [
     '#{%w( **/{*,.rspec,.gitignore,.yardopts} ).map { |file| Pathname.glob(gempath.join(file)) }.flatten.reject{|f|

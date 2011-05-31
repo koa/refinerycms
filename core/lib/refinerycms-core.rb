@@ -1,6 +1,6 @@
 require 'acts_as_indexed'
 require 'truncate_html'
-require 'will_paginate'
+require 'kaminari'
 
 module Refinery
   autoload :Activity, File.expand_path('../refinery/activity', __FILE__)
@@ -9,6 +9,8 @@ module Refinery
   autoload :ApplicationHelper, File.expand_path('../refinery/application_helper', __FILE__)
   autoload :Configuration, File.expand_path('../refinery/configuration', __FILE__)
   autoload :Engine, File.expand_path('../refinery/engine', __FILE__)
+  autoload :Menu, File.expand_path('../refinery/menu', __FILE__)
+  autoload :MenuItem, File.expand_path('../refinery/menu_item', __FILE__)
   autoload :Plugin,  File.expand_path('../refinery/plugin', __FILE__)
   autoload :Plugins, File.expand_path('../refinery/plugins', __FILE__)
 end
@@ -58,6 +60,7 @@ module Refinery
     end
 
     class Engine < ::Rails::Engine
+      isolate_namespace ::Refinery
 
       config.autoload_paths += %W( #{config.root}/lib )
 
@@ -75,6 +78,8 @@ module Refinery
 
         # TODO: Is there a better way to cache assets in engines?
         # Also handles a change in Rails 3.1 with AssetIncludeTag being invented.
+        # TODO: can we remove this?
+=begin
         tag_helper_class = if defined?(::ActionView::Helpers::AssetTagHelper::AssetIncludeTag)
           ::ActionView::Helpers::AssetTagHelper::AssetIncludeTag
         else
@@ -93,6 +98,7 @@ module Refinery
             return_path.to_s
           end
         end
+=end
       end
 
       # Register the plugin
@@ -156,18 +162,6 @@ module Refinery
           end
         end if ::Rack.version <= '1.2.1'
       end
-
-      initializer 'set will_paginate link labels' do |app|
-        WillPaginate::ViewHelpers.pagination_options[:previous_label] = "&laquo;".html_safe
-        WillPaginate::ViewHelpers.pagination_options[:next_label] = "&raquo;".html_safe
-      end
-
-      initializer 'ensure devise is initialised' do |app|
-        unless Rails.root.join('config', 'initializers', 'devise.rb').file?
-          load Refinery.roots('core').join(*%w(lib generators templates config initializers devise.rb))
-        end
-      end
-
     end
   end
 

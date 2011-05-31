@@ -1,9 +1,9 @@
 sl:
   activerecord:
     models:
-      refinery_setting: Refinery nastavitve
+      setting: Refinery nastavitve
     attributes:
-      refinery_setting:
+      setting:
         name: Ime
         value: Vrednost
   admin:

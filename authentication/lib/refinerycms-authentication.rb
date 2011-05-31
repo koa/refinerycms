@@ -6,6 +6,7 @@ module Refinery
   module Authentication
 
     class Engine < ::Rails::Engine
+      isolate_namespace ::Refinery
 
       initializer 'serve static assets' do |app|
         app.middleware.insert_after ::ActionDispatch::Static, ::ActionDispatch::Static, "#{root}/public"
@@ -13,23 +14,23 @@ module Refinery
 
       config.autoload_paths += %W( #{config.root}/lib )
 
-      config.after_initialize do
+      initializer "init plugin", :after => :set_routes_reloader do |app|
         ::Refinery::Plugin.register do |plugin|
           plugin.name = 'refinery_users'
-          plugin.version = %q{0.9.9.21}
+          plugin.version = %q{1.0.0}
           plugin.menu_match = /(refinery|admin)\/users$/
           plugin.activity = {
             :class => User,
             :title => 'username'
           }
-          plugin.url = {:controller => '/admin/users'}
+          plugin.url = app.routes.url_helpers.refinery_admin_users_path
         end
       end
 
       refinery.before_inclusion do
         [::Refinery::ApplicationController, ::Refinery::ApplicationHelper].each do |c|
           c.send :require, File.expand_path('../authenticated_system', __FILE__)
-          c.send :include, AuthenticatedSystem
+          c.send :include, ::Refinery::AuthenticatedSystem
         end
       end
     end
