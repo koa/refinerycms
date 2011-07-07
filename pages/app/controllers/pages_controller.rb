@@ -6,10 +6,11 @@ class PagesController < ApplicationController
                                           'check_box'})
     # Save whole Page after delivery
     after_filter { |c| c.write_cache }
-
-    Rack::Cache::Context.class_eval do
-      include DragonflyServerCache
-      alias_method_chain :call, :cache
+    unless Rack::Cache::Context.include? DragonflyServerCache
+      Rack::Cache::Context.class_eval do
+        include DragonflyServerCache
+        alias_method_chain :call, :cache
+      end
     end
   end
 
@@ -46,7 +47,7 @@ class PagesController < ApplicationController
   protected
   def write_cache
     # Cache only Pages without Flash message
-    unless flash.size > 0
+    unless flash.size > 0 || refinery_user?
       cache_page(response.body, File.join('', 'refinery_page_cache',
                                           request.path).to_s)
     end
