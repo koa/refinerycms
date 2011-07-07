@@ -1,3 +1,4 @@
+require 'pages/dragonfly_server_cache'
 class PagesController < ApplicationController
   if RefinerySetting.find_or_set('cache_pages_full', false,
                                  {:restricted=>true,
@@ -5,6 +6,11 @@ class PagesController < ApplicationController
                                           'check_box'})
     # Save whole Page after delivery
     after_filter { |c| c.write_cache }
+
+    Rack::Cache::Context.class_eval do
+      include DragonflyServerCache
+      alias_method_chain :call, :cache
+    end
   end
 
   # This action is usually accessed with the root path, normally '/'
