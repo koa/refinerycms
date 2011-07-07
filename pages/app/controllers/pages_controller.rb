@@ -29,7 +29,7 @@ class PagesController < ApplicationController
       # if the admin wants this to be a "placeholder" page which goes to its first child, go to that instead.
       if @page.skip_to_first_child && (first_live_child = @page.children.order('lft ASC').live.first).present?
         redirect_to first_live_child.url and return
-      elsif @page.link_url.present?
+      elsif @page.link_url.present? && @page.link_url != '/'
         redirect_to @page.link_url and return
       end
     else
@@ -39,7 +39,10 @@ class PagesController < ApplicationController
 
   protected
   def write_cache
-    cache_page(response.body, File.join('', 'refinery_page_cache',
-                                        request.path).to_s)
+    # Cache only Pages without Flash message
+    unless flash.size > 0
+      cache_page(response.body, File.join('', 'refinery_page_cache',
+                                          request.path).to_s)
+    end
   end
 end
